@@ -33,7 +33,7 @@ export class UsersService {
        throw new NotFoundException(`User with id ${id} not found`);
     }
 
-      const post = this.userRepository.manager.getRepository('Post').create({ ...createPostDto, user: user });
+      const post = this.userRepository.create({ ...createPostDto });
       return this.userRepository.manager.save(post);  
   }
 
