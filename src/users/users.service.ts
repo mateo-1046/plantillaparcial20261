@@ -34,7 +34,7 @@ export class UsersService {
     }
 
       const post = this.userRepository.create({ ...createPostDto });
-      return this.userRepository.manager.save(post);  
+      return this.userRepository.save(post);  
   }
 
   findPostsByUser(id: number) {
