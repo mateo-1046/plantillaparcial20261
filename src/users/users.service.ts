@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { Post } from 'src/post/entities/post.entity';
 import { Repository } from 'typeorm';
 import { CreatePostDto } from 'src/post/dto/create-post.dto';
 
@@ -11,6 +12,8 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(Post)
+    private readonly postRepository: Repository<Post>,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -27,14 +30,17 @@ export class UsersService {
 
 
   async createPostsByUser(id: number, createPostDto: CreatePostDto) {
-    const user = this.userRepository.findOne({ where: { id } });
+    const user = await this.userRepository.findOne({ where: { id } });
 
-    if(!user){
-       throw new NotFoundException(`User with id ${id} not found`);
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
     }
 
-      const post = this.userRepository.create({ ...createPostDto });
-      return this.userRepository.save(post);  
+    const post = this.postRepository.create({
+      ...createPostDto,
+      user,
+    });
+    return this.postRepository.save(post);
   }
 
   findPostsByUser(id: number) {

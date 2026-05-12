@@ -4,13 +4,11 @@ export class CreateCommentDto {
 
     @IsString()
     @IsNotEmpty()
-    @MaxLength(2)
-    content!:String;
+    content!:string;
 
     @IsString()
     @IsNotEmpty()
-    @MaxLength(2)
-    author!:String;
+    author!:string;
 
 
 

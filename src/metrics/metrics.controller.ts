@@ -21,20 +21,12 @@ export class MetricsController {
     return this.metricsService.engagement(engagementQuery);
   }
 
-  @Get('cmp')
+  @Get('cpm')
   cmp(@Query() cmpQuery: cmpQueryDto) {
     return this.metricsService.cmp(cmpQuery);
   }
 
-  @Get()
-  findAll() {
-    return this.metricsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.metricsService.findOne(+id);
-  }
+  
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateMetricDto: UpdateMetricDto) {

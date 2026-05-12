@@ -23,7 +23,10 @@ export class PostService {
       throw new NotFoundException(`Post with id ${id} not found`);
     }
 
-    const comment = this.commentRepository.create({ ...createCommentDto, post } as any);
+    const comment = this.commentRepository.create({
+      ...createCommentDto,
+      post,
+    });
       
     return this.commentRepository.save(comment);
   }

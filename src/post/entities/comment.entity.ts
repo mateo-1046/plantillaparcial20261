@@ -12,7 +12,7 @@ export class Comment {
     content!:string;
 
     @Column()
-    author: number = 0;
+    author!: string;
 
 
     @CreateDateColumn()
