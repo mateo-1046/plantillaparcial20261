@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiKeyGuard } from '../auth/api-key.guard';
+import { CreatePostDto } from 'src/post/dto/create-post.dto';
 
 @Controller('users')
 export class UsersController {
@@ -22,7 +23,7 @@ export class UsersController {
 
   @Post(':id/posts')
   @UseGuards(ApiKeyGuard)
-  CreatePostByUser(@Param('id') id: string, @Body() createPostDto: CreateUserDto) {
+  CreatePostByUser(@Param('id') id: string, @Body() createPostDto: CreatePostDto) {
     return this.usersService.createPostsByUser(+id,createPostDto);
   }
 

@@ -1,11 +1,19 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
+import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
 @Controller('post')
 export class PostController {
   constructor(private readonly postService: PostService) {}
+
+
+  @Post(':id/comments')
+  createComment(@Param('id') id: number, @Body() createCommentDto: CreateCommentDto) {
+    return this.postService.createComment(id,createCommentDto);
+  }
+
 
   @Post()
   create(@Body() createPostDto: CreatePostDto) {

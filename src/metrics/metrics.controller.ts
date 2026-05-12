@@ -4,6 +4,7 @@ import { CreateMetricDto } from './dto/create-metric.dto';
 import { UpdateMetricDto } from './dto/update-metric.dto';
 
 import { EngagementQueryDto } from './dto/engagementQuery.dto';
+import { cmpQueryDto } from './dto/cmpQuery.dto';
 
 
 @Controller('metrics')
@@ -18,6 +19,11 @@ export class MetricsController {
   @Get('engagement')
   engagement(@Query() engagementQuery: EngagementQueryDto) {
     return this.metricsService.engagement(engagementQuery);
+  }
+
+  @Get('cmp')
+  cmp(@Query() cmpQuery: cmpQueryDto) {
+    return this.metricsService.cmp(cmpQuery);
   }
 
   @Get()
